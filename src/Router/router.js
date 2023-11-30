@@ -4,6 +4,6 @@ import LoginPage from "../pages/LoginPage.vue"
 export default createRouter({
     history: createWebHistory(),
     routes : [
-        {path: '/', component: LoginPage}
+        {path: '', component: LoginPage}
     ]
 })
