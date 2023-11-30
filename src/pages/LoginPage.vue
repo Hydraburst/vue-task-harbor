@@ -15,12 +15,6 @@ import LoginForm from '../components/LoginForm.vue';
 import Background from '../components/Background.vue';
 export default {
     components: { LoginForm, Background },
-    data() {
-        return {
-            
-
-        }
-    }
 }
 </script>
 <style scoped>
