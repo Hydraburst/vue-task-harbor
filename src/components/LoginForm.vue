@@ -1,25 +1,27 @@
 <template>
-     <form @submit.prevent>
+    <form @submit.prevent>
         <div class="formContent">
             <div class="inputSection">
-                <p>Email</p>
-                <div class="inputFieldWrap" :class="setMailError">
+                <label for="email">Email</label>
+                <div :class="['inputFieldWrap', setMailError]">
                     <input 
+                        id="email" 
                         type="text" 
                         v-model="userEmail" 
                         @blur="validateEmail" 
                         @click="toggleEmailError" 
                     />
                 </div>
-                <p class="errorText" v-if="!isEmailValid">{{ invalidEmailErrorText }}</p>
+                <span class="errorText" v-if="!isEmailValid">{{ invalidEmailErrorText }}</span>
             </div>
             <div class="inputSection">
-                <p>Password</p>
-                <div class="inputFieldWrap" :class="setPasswordError">
+                <label for="password">Password</label>
+                <div :class="['inputFieldWrap', setPasswordError]">
                     <input 
+                        id="password" 
                         :type="type" 
                         v-model="userPassword" 
-                        @blur="validatePassword" 
+                        @blur="validatePassword"
                         @click="togglePasswordError" 
                     />
                     <img 
@@ -28,7 +30,7 @@
                         @click="toggleShowPassword" 
                     />
                 </div>
-                <p class="errorText" v-if="!isPasswordValid">{{ invalidPasswordErrorText }}</p>
+                <span class="errorText" v-if="!isPasswordValid">{{ invalidPasswordErrorText }}</span>
             </div>
             <button type="submit" @click="submitForm">
                 <p>Log in</p>
@@ -40,94 +42,116 @@
 <script>
 import imgNotVisible from "../assets/not-visible.png"
 import imgVisible from "../assets/visible.png"
+import { ref, computed } from 'vue'
+
 export default {
-    data() {
-        return {
-            imgNotVisible,
-            imgVisible,
-            userEmail: '',
-            showPassword: false,
-            userPassword: '',
-            isEmailValid: 'true',
-            isPasswordValid: 'true',
-            invalidEmailErrorText: '',
-            invalidPasswordErrorText: '',
-            passwordImg: imgVisible,
-            type: 'password'
-        };
-    },
-    methods: {
-        submitForm() {
-            this.validateEmail()
-            this.validatePassword()
-            if (this.isEmailValid && this.isPasswordValid) {
-                this.userEmail = ""
-                this.userPassword = ""
+    setup() {
+        const userEmail = ref('')
+        const showPassword = ref(false)
+        const userPassword = ref('')
+        const isEmailValid = ref(true)
+        const isPasswordValid = ref(true)
+        const invalidEmailErrorText = ref('')
+        const invalidPasswordErrorText = ref('')
+        const passwordImg = ref(imgVisible)
+        const type = ref('password')
+
+        const submitForm = () => {
+            validateEmail()
+            validatePassword()
+            if (isEmailValid.value && isPasswordValid.value) {
+                userEmail.value = ""
+                userPassword.value = ""
             } else {
                 return
             }
-        },
-        validateEmail() {
-            if (this.userEmail !== "") {
+        };
+
+        const validateEmail = () => {
+            if (userEmail.value !== "") {
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                this.isEmailValid = emailPattern.test(this.userEmail);
-                this.invalidEmailErrorText = 'Please enter valid Email adress.'
+                isEmailValid.value = emailPattern.test(userEmail.value);
+                invalidEmailErrorText.value = 'Please enter valid Email adress.'
             } else {
-                this.invalidEmailErrorText = 'Required field'
-                this.isEmailValid = false;
+                invalidEmailErrorText.value = 'Required field'
+                isEmailValid.value = false;
             }
-        },
-        validatePassword() {
-            if (this.userPassword !== "") {
-                this.isPasswordValid = this.userPassword.length >= 8;
-                this.invalidPasswordErrorText = "Please enter a valid password"
-            } else {
-                this.invalidPasswordErrorText = "Required field"
-                this.isPasswordValid = false
-            }
-        },
+        };
 
-        toggleEmailError() {
-            if (!this.isEmailValid) {
-                this.isEmailValid = true;
-            }
-        },
-        togglePasswordError() {
-            if (!this.isPasswordValid) {
-                this.isPasswordValid = true;
-            }
-        },
-        toggleShowPassword() {
-            if (this.showPassword) {
-                this.passwordImg = this.imgNotVisible
-                this.type = 'text'
-                this.showPassword = !this.showPassword
+        const validatePassword = () => {
+            if (userPassword.value !== "") {
+                isPasswordValid.value = userPassword.value.length >= 8;
+                invalidPasswordErrorText.value = "Please enter a valid password"
             } else {
-                this.passwordImg = this.imgVisible
-                this.type = 'password'
-                this.showPassword = !this.showPassword
+                invalidPasswordErrorText.value = "Required field"
+                isPasswordValid.value = false
             }
+        };
 
+        const toggleEmailError = () => {
+            if (!isEmailValid.value) {
+                isEmailValid.value = true;
+            }
+        };
+
+        const togglePasswordError = () => {
+            if (!isPasswordValid.value) {
+                isPasswordValid.value = true;
+            }
+        };
+
+        const toggleShowPassword = () => {
+            if (showPassword.value) {
+                passwordImg.value = imgNotVisible
+                type.value = 'text'
+                showPassword.value = !showPassword.value
+            } else {
+                passwordImg.value = imgVisible
+                type.value = 'password'
+                showPassword.value = !showPassword.value
+            }
+        };
+
+        const setMailError = computed(function () {
+            return {
+                inputFieldError: !isEmailValid.value,
+            }
+        })
+
+        const setPasswordError = computed(function () {
+            return {
+                inputFieldError: !isPasswordValid.value
+            }
         }
-    },
-    computed: {
-        setMailError() {
-            return {
-                inputFieldError: !this.isEmailValid,
-            }
-        },
-        setPasswordError() {
-            return {
-                inputFieldError: !this.isPasswordValid
-            }
-        },
+        )
+
+        return {
+            userEmail,
+            showPassword,
+            userPassword,
+            isEmailValid,
+            isPasswordValid,
+            invalidEmailErrorText,
+            invalidPasswordErrorText,
+            passwordImg,
+            type,
+            submitForm,
+            validateEmail,
+            validatePassword,
+            toggleEmailError,
+            togglePasswordError,
+            toggleShowPassword,
+            setMailError,
+            setPasswordError,
+        }
     }
 }
-
 </script>
+
 <style scoped>
 form {
     background-color: #e9dffb;
+    min-width: 402px;
     border-radius: 4px;
     margin: 0 auto;
     z-index: 100;
@@ -138,7 +162,15 @@ p {
     font-size: 12px;
 }
 
-span {
+label {
+    font-size: 14px;
+}
+
+.inputSection span {
+    font-size: 14px;
+}
+
+.footerText span {
     font-weight: 600;
     border-bottom: 2px solid black;
 }
@@ -173,6 +205,7 @@ button p {
     font-size: 16px;
     padding: 14px 0;
 }
+
 .formContent {
     padding: 1.75rem 1.2rem;
     display: flex;
@@ -202,7 +235,7 @@ button p {
 }
 
 .errorText {
-    color:var(--error);
+    color: var(--error);
 }
 
 .inputSection p {
@@ -211,5 +244,11 @@ button p {
 
 .footerText {
     text-align: center;
+}
+
+@media screen and (max-width: 375px) {
+    form {
+        min-width: 355px;
+    }
 }
 </style>

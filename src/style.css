@@ -117,6 +117,7 @@ table {
   --notifyInfo: #4187ff;
   --notifySuccess: #60b286;
   --notifyWarning: #f98347;
+  --defaultSize: 14px;
 }
 
 * {

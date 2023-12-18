@@ -31,8 +31,9 @@ import bgLsPurple from "../assets/bg-ls-purple.png"
 import bgLs from "../assets/bg-ls.png"
 import bgRsBirch from "../assets/bg-rs-birch.png"
 import bgRsBlue from "../assets/bg-rs-blue.png"
+
 export default {
-    data() {
+    setup() {
         return {
             logoTop,
             logoMid,
@@ -73,24 +74,27 @@ export default {
     max-width: 100%;
     z-index: -1;
 }
+
 .bgImgRight {
     right: 0;
     bottom: 0;
 }
+
 .bgImgLeft {
     top: 0;
     left: 0;
 }
 
-@media screen and (max-width: 769px){
+@media screen and (max-width: 769px) {
     .bgImg {
         width: 370px;
     }
+
     .bgRsBlue {
         width: 290px;
     }
 
-    .bgLs{
+    .bgLs {
         width: 320px
     }
 }
@@ -99,13 +103,15 @@ export default {
     .bgImg {
         width: 180px;
     }
+
     .bgRsBlue {
         width: 120px;
     }
 
-    .bgLs{
+    .bgLs {
         width: 150px
     }
+
     .logo {
         justify-content: center;
         align-items: center;
