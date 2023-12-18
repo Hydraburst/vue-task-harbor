@@ -3,5 +3,5 @@ const LoginPage = () => import("../pages/LoginPage.vue");
 
 export default createRouter({
   history: createWebHistory(),
-  routes: [{ path: "", component: LoginPage }],
+  routes: [{ path: "/", component: LoginPage }],
 });
