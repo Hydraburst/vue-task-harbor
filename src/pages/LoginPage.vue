@@ -25,6 +25,7 @@ export default {
 h2 
     font-size: 60px
     font-weight: 800
+    line-height: 66px
 
 
 h4 

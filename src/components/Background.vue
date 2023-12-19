@@ -62,6 +62,7 @@ export default {
     max-width: 58px
     max-height: 80px
     align-items: center
+    line-height: 0
 
 
 .underline 

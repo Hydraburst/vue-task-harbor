@@ -164,7 +164,7 @@ p
 
 label 
     font-size: 12px
-    
+
 
 .footerText 
     span 
@@ -174,6 +174,7 @@ label
 
 input 
     margin: 0
+    padding: 0
     background: none
     border: none
     outline: none
@@ -204,7 +205,7 @@ button
 
 
 .formContent 
-    padding: 1.75rem 1.2rem
+    padding: 2rem 1.625rem
     display: flex
     flex-direction: column
     gap: 20px
