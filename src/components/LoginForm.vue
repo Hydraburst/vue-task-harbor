@@ -24,7 +24,7 @@
                         @blur="validatePassword"
                         @click="togglePasswordError" 
                     />
-                    <img 
+                    <img
                         :src="passwordImg" 
                         alt="img" 
                         @click="toggleShowPassword" 
@@ -163,7 +163,8 @@ p
 
 
 label 
-    font-size: 12px
+    font-size: 14px
+    line-height: 20px
 
 
 .footerText 
@@ -233,7 +234,7 @@ button
 
 .errorText 
     color: var(--error)
-    font-size: 12px
+    font-size: 14px
 
 
 .inputSection 

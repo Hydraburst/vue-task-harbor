@@ -51,7 +51,7 @@ export default {
 .logo 
     display: flex
     justify-content: flex-end
-    padding: 32px 66px
+    padding: 32px 66px 0 32px
     align-items: flex-start
 
 
