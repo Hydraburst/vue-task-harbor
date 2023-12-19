@@ -46,11 +46,11 @@ import { ref, computed } from 'vue'
 
 export default {
     setup() {
-        const userEmail = ref('')
         const showPassword = ref(false)
-        const userPassword = ref('')
         const isEmailValid = ref(true)
         const isPasswordValid = ref(true)
+        const userEmail = ref('')
+        const userPassword = ref('')
         const invalidEmailErrorText = ref('')
         const invalidPasswordErrorText = ref('')
         const passwordImg = ref(imgVisible)
@@ -148,107 +148,107 @@ export default {
 }
 </script>
 
-<style scoped>
-form {
-    background-color: #e9dffb;
-    min-width: 402px;
-    border-radius: 4px;
-    margin: 0 auto;
-    z-index: 100;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
+<style scoped lang="sass">
+form 
+    background-color: #e9dffb
+    min-width: 402px
+    border-radius: 4px
+    margin: 0 auto
+    z-index: 100
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
 
-p {
-    font-size: 12px;
-}
 
-label {
-    font-size: 14px;
-}
+p 
+    font-size: 12px
 
-.inputSection span {
-    font-size: 14px;
-}
 
-.footerText span {
-    font-weight: 600;
-    border-bottom: 2px solid black;
-}
+label 
+    font-size: 12px
 
-input {
-    margin: 0;
-    background: none;
-    border: none;
-    outline: none;
-    font-family: inherit;
-    font-size: 100%;
-    vertical-align: baseline;
-    box-sizing: border-box;
-}
 
-button {
-    background-color: var(--primary);
-    margin-top: 36px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-}
 
-img {
-    max-width: 20px;
-    max-height: 15px;
-}
+    font-size: 14px
 
-button p {
-    color: #fff;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 14px 0;
-}
 
-.formContent {
-    padding: 1.75rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+.footerText 
+    span 
+        font-weight: 600
+        border-bottom: 2px solid black
 
-.inputSection {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
 
-.inputFieldWrap {
-    display: flex;
-    padding: 14px 16px 14px 16px;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid var(--primary);
-    align-items: center;
-}
+input 
+    margin: 0
+    background: none
+    border: none
+    outline: none
+    font-family: inherit
+    font-size: 100%
+    vertical-align: baseline
+    box-sizing: border-box
 
-.inputFieldError {
-    border: 1px solid var(--error);
-}
 
-.errorText {
-    color: var(--error);
-}
+button 
+    background-color: var(--primary)
+    margin-top: 36px
+    border-radius: 4px
+    border: none
+    cursor: pointer
 
-.inputSection p {
-    font-size: 14px;
-}
 
-.footerText {
-    text-align: center;
-}
+img 
+    max-width: 20px
+    max-height: 15px
 
-@media screen and (max-width: 375px) {
-    form {
-        min-width: 355px;
-    }
-}
+button 
+    p 
+        color: #fff
+        font-weight: 500
+        font-size: 16px
+        padding: 14px 0
+
+
+.formContent 
+    padding: 1.75rem 1.2rem
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+
+.inputSection 
+    display: flex
+    flex-direction: column
+    gap: 8px
+
+.inputFieldWrap 
+    display: flex
+    padding: 14px 16px 14px 16px
+    flex-direction: row
+    justify-content: space-between
+    background-color: #fff
+    border-radius: 4px
+    border: 1px solid var(--primary)
+    align-items: center
+
+
+.inputFieldError 
+    border: 1px solid var(--error)
+
+
+.errorText 
+    color: var(--error)
+    font-size: 12px
+
+
+.inputSection 
+    p 
+        font-size: 14px
+
+
+.footerText 
+    text-align: center
+
+
+@media screen and (max-width: 376px) 
+    form 
+        min-width: 355px
 </style>

@@ -20,30 +20,31 @@ export default {
 }
 </script>
 
-<style scoped>
-h2 {
-    font-size: 60px;
-    font-weight: 800;
-}
+<style scoped lang="sass">
 
-h4 {
-    font-size: 20px;
-    font-weight: 500;
-}
+h2 
+    font-size: 60px
+    font-weight: 800
 
-.pageTitle {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 0 auto;
-    max-width: 400px;
-    text-align: center;
-    margin-bottom: 44px;
-}
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+h4 
+    font-size: 20px
+    font-weight: 500
+
+
+.pageTitle 
+    display: flex
+    flex-direction: column
+    gap: 8px
+    margin: 0 auto
+    max-width: 400px
+    text-align: center
+    margin-bottom: 44px
+
+
+.container 
+    display: flex
+    justify-content: center
+    align-items: center
+
 </style>
