@@ -4,31 +4,16 @@
             <div class="inputSection">
                 <label for="email">Email</label>
                 <div :class="['inputFieldWrap', setMailError]">
-                    <input 
-                        id="email" 
-                        type="text" 
-                        v-model="userEmail" 
-                        @blur="validateEmail" 
-                        @click="toggleEmailError" 
-                    />
+                    <input id="email" type="text" v-model="userEmail" @blur="validateEmail" @click="toggleEmailError" />
                 </div>
                 <span class="errorText" v-if="!isEmailValid">{{ invalidEmailErrorText }}</span>
             </div>
             <div class="inputSection">
                 <label for="password">Password</label>
                 <div :class="['inputFieldWrap', setPasswordError]">
-                    <input 
-                        id="password" 
-                        :type="type" 
-                        v-model="userPassword" 
-                        @blur="validatePassword"
-                        @click="togglePasswordError" 
-                    />
-                    <img
-                        :src="passwordImg" 
-                        alt="img" 
-                        @click="toggleShowPassword" 
-                    />
+                    <input id="password" :type="type" v-model="userPassword" @blur="validatePassword"
+                        @click="togglePasswordError" />
+                    <img :src="passwordImg" alt="img" @click="toggleShowPassword" />
                 </div>
                 <span class="errorText" v-if="!isPasswordValid">{{ invalidPasswordErrorText }}</span>
             </div>
@@ -43,9 +28,11 @@
 import imgNotVisible from "../assets/not-visible.png"
 import imgVisible from "../assets/visible.png"
 import { ref, computed } from 'vue'
+import { useAuthStore } from "../stores/auth"
 
 export default {
     setup() {
+        const authStore = useAuthStore()
         const showPassword = ref(false)
         const isEmailValid = ref(true)
         const isPasswordValid = ref(true)
@@ -56,12 +43,18 @@ export default {
         const passwordImg = ref(imgVisible)
         const type = ref('password')
 
+        const signIn = async () => {
+            await authStore.auth({ identifier: email.value, password: password.value })
+        }
+
         const submitForm = () => {
             validateEmail()
             validatePassword()
             if (isEmailValid.value && isPasswordValid.value) {
+                signIn()
                 userEmail.value = ""
                 userPassword.value = ""
+
             } else {
                 return
             }
