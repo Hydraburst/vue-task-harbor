@@ -8,6 +8,9 @@ export const useAuthStore = defineStore("auth", () => {
     email: "",
     username: "",
   });
+
+  const error = ref("");
+  const responseStatus = ref("")
   const auth = async (payload) => {
     try {
       let response = await axios.post("http://localhost:1337/api/auth/local", {
@@ -18,13 +21,19 @@ export const useAuthStore = defineStore("auth", () => {
         email: response.data.email,
         username: response.data.username,
       };
-      console.log(response);
     } catch (err) {
-      console.log(err);
+      error.value = err.response.data.error.message;
+      responseStatus.value="400"
     }
+    if (!error.value) {
+      responseStatus.value="200"
+      error.value = "Successfully"
+    }    
   };
   return {
     auth,
     userInfo,
+    error,
+    responseStatus,
   };
 });

@@ -13,10 +13,11 @@
 
 <script>
 import LoginForm from '../components/LoginForm.vue';
-import Background from '../components/Background.vue';
+import Background from '../components/background.vue';
+import Notifications from '../components/notifications/notifications.vue';
 
 export default {
-    components: { LoginForm, Background },
+    components: { LoginForm, Background, Notifications }
 }
 </script>
 

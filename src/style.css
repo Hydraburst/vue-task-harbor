@@ -108,6 +108,7 @@ table {
   --backgroundHover: ##ddd7e9;
   --secondary: #cab2f5;
   --error: #ed2424;
+  --errorPrimary: #fdeceb;
   --placeholder: #808080;
   --accent: #5418c3;
   --accentHover: #3d1c7b;
@@ -115,8 +116,11 @@ table {
   --whiteShadow: #f4f4f4;
   --primaryBorder: #c5bad9;
   --notifyInfo: #4187ff;
+  --notifyInfoPrimary: #EAEFFF;
   --notifySuccess: #60b286;
+  --notifySuccessPrimary: #e8f3ed;
   --notifyWarning: #f98347;
+  --notifyWarningPrimary: #feefe7;
   --defaultSize: 14px;
 }
 
