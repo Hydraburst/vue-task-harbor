@@ -10,8 +10,9 @@ export const useAuthStore = defineStore("auth", () => {
   });
 
   const error = ref("");
-  const responseStatus = ref("")
+  const responseStatus = ref("");
   const auth = async (payload) => {
+    error.value = "";
     try {
       let response = await axios.post("http://localhost:1337/api/auth/local", {
         ...payload,
@@ -23,12 +24,14 @@ export const useAuthStore = defineStore("auth", () => {
       };
     } catch (err) {
       error.value = err.response.data.error.message;
-      responseStatus.value="400"
+      responseStatus.value = "400";
+      console.log(err);
     }
     if (!error.value) {
-      responseStatus.value="200"
-      error.value = "Successfully"
-    }    
+      responseStatus.value = "200";
+      error.value = "Successfully";
+    }
+    
   };
   return {
     auth,
