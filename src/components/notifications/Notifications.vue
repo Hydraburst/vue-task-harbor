@@ -1,52 +1,20 @@
 <template>
     <div class="noteWrap">
-        <div v-if="responseStatus === '100'" :class="['noteContentWrap', 'noteWrapWarning']">
+        <div :class="['noteContentWrap', defineWrap]">
             <div class="noteStartWrap">
-                <img :src="warningIcon">
-                <p class="warningText">
-                    {{ message }}
-                </p>
-                <img :src="warningCloseIcon" alt="" class="errorClose">
-            </div>
-        </div>
-    </div>
-    <div class="noteWrap">
-        <div v-if="responseStatus === '200'" :class="['noteContentWrap','noteWrapSuccess']">
-            <div class="noteStartWrap">
-                <img :src="successIcon">
-                <p class="successText">
+                <img :src="defineIcon">
+                <p :class="defineText">
                     {{ message }}
                 </p>
             </div>
-            <img :src="succesCloseIcon" alt="" class="errorClose">
-        </div>
-    </div>
-    <div class="noteWrap">
-        <div v-if="responseStatus === '300'" :class="['noteContentWrap', 'noteWrapInfo']">
-            <div class="noteStartWrap">
-                <img :src="infoIcon">
-                <p class="infoText">
-                    {{ message }}
-                </p>
-            </div>
-            <img :src="infoCloseIcon" alt="" class="errorClose">
-        </div>
-    </div>
-    <div class="noteWrap">
-        <div v-if="responseStatus === '400'" :class="['noteContentWrap', 'noteWrapError']">
-            <div class="noteStartWrap">
-                <img :src="errorIcon">
-                <p class="errorText">
-                    {{ message }}
-                </p>
-            </div>
-            <img :src="errorCloseIcon" alt="" class="errorClose">
+            <img :src="defineButton" alt="" class="errorClose">
         </div>
     </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import {useAuthStore} from '../../stores/auth'
+import { defineProps, computed, ref } from 'vue'
 import errorIcon from '../../assets/error.svg'
 import errorCloseIcon from '../../assets/close.svg'
 import infoIcon from "../../assets/info-icon.svg"
@@ -56,7 +24,37 @@ import warningCloseIcon from "../../assets/warning-close.svg"
 import successIcon from "../../assets/success-icon.svg"
 import succesCloseIcon from "../../assets/success-close.svg"
 
-const props = defineProps(['message', 'responseStatus'])
+
+const  authStore = useAuthStore()
+
+const props = defineProps(['responseStatus'])
+const classes = ref({
+    noteWrapSuccess: "noteWrapSuccess",
+    noteWrapInfo: "noteWrapInfo",
+    noteWrapWarning: "noteWrapWarning",
+    noteWrapError: "noteWrapError",
+
+})
+const defineIcon = ref('')
+const defineButton = ref('')
+const defineWrap = ref('')
+const defineText = ref ('')
+const message = ref('')
+
+if (props.responseStatus === '200') {
+    defineIcon.value = successIcon
+    defineButton.value = succesCloseIcon
+    defineWrap.value = classes.value.noteWrapSuccess
+    defineText.value = 'successText'
+    message.value = "Successfully logined"
+    
+} else if (props.responseStatus === "400") {
+    defineIcon.value = errorIcon
+    defineButton.value = errorCloseIcon
+    defineWrap.value = classes.value.noteWrapError
+    defineText.value = 'errorText'
+    message.value = authStore.error
+}
 </script>
 
 <style lang="sass" scoped>

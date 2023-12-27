@@ -1,36 +1,27 @@
 <template>
     <div class="noteList">
-        <transition-group name="list" tag="ul">
-            <li v-for="note in notes" :key="Date.now()" :id="Date.now()">
-                <notifications :message="note" :responseStatus="authStore.responseStatus" />
-            </li>
-        </transition-group>
+        <div>
+            <transition-group tag="ul" name="user-list">
+                <li v-for="note in notes" :key="notes.values.length">
+                    <notifications :responseStatus="authStore.responseStatus" />
+                </li>
+            </transition-group>
+        </div>
     </div>
     <form @submit.prevent>
         <div class="formContent">
             <div class="inputSection">
                 <label for="email">Email</label>
                 <div :class="['inputFieldWrap', setMailError]">
-                    <input 
-                        id="email" 
-                        type="text" 
-                        v-model="userEmail" 
-                        @blur="validateEmail" 
-                        @click="toggleEmailError" 
-                    />
+                    <input id="email" type="text" v-model="userEmail" @blur="validateEmail" @click="toggleEmailError" />
                 </div>
                 <span class="errorText" v-if="!isEmailValid">{{ invalidEmailErrorText }}</span>
             </div>
             <div class="inputSection">
                 <label for="password">Password</label>
                 <div :class="['inputFieldWrap', setPasswordError]">
-                    <input 
-                        id="password" 
-                        :type="type" 
-                        v-model="userPassword" 
-                        @blur="validatePassword"
-                        @click="togglePasswordError" 
-                    />
+                    <input id="password" :type="type" v-model="userPassword" @blur="validatePassword"
+                        @click="togglePasswordError" />
                     <img :src="passwordImg" alt="img" @click="toggleShowPassword" />
                 </div>
                 <span class="errorText" v-if="!isPasswordValid">{{ invalidPasswordErrorText }}</span>
@@ -45,11 +36,10 @@
 <script setup>
 import imgNotVisible from "../assets/not-visible.png"
 import imgVisible from "../assets/visible.png"
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useAuthStore } from "../stores/auth"
 
 import Notifications from "./notifications/notifications.vue"
-
 
 const authStore = useAuthStore()
 const showPassword = ref(false)
@@ -63,24 +53,11 @@ const passwordImg = ref(imgVisible)
 const type = ref('password')
 const notes = ref([])
 
-
-onMounted(() => {
-    setInterval(() => {
-        cleanNotes()
-    }, 5000)
-})
-
-const cleanNotes = () => {
-    if (notes.value.length > 0) {
-        notes.value.splice(0, 1)
-    }
-}
-
 const signIn = async () => {
     await authStore.auth({ identifier: email.value, password: password.value })
-    notes.value.push(authStore.error)
-    
-};
+    notes.value.unshift(authStore.error)
+}
+
 const submitForm = () => {
     validateEmail()
     validatePassword()
@@ -93,7 +70,8 @@ const submitForm = () => {
     else {
         return;
     }
-};
+}
+
 const validateEmail = () => {
     if (userEmail.value !== "") {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -150,15 +128,49 @@ const setPasswordError = computed(function () {
 </script>
 
 <style scoped lang="sass">
+ul 
+  position: absolute
+  display: flex
+  flex-direction: column
+  top: 1rem
+  right: 2rem
+  list-style: none
+  gap: 1rem
+  margin: 1rem 0
+  padding: 0
 
 
-.list-enter-active,
-.list-leave-active 
-  transition: all 0.5s ease
+li 
+  text-align: center
 
-.list-enter-from,
-.list-leave-to 
+
+.user-list-enter-from 
   opacity: 0
+  transform: translateX(30px)
+  
+
+
+.user-list-enter-active 
+  transition: all 0.3s ease-out
+
+.user-list-enter-to,
+.user-list-leave-from 
+  opacity: 1
+  transform: translateX(0)
+  
+
+
+.user-list-leave-active 
+  transition: all 0.3s ease-in
+
+
+.user-list-leave-to 
+  opacity: 0
+  transform: translateX(30px)
+
+
+.user-list-move 
+  transition: transform 0.8s ease
 
 
 form 
@@ -183,8 +195,6 @@ label
     span 
         font-weight: 600
         border-bottom: 2px solid black
-
-
 input 
     margin: 0
     padding: 0
@@ -221,7 +231,6 @@ button
         font-weight: 500
         font-size: 16px
         padding: 14px 0
-
 
 .formContent 
     padding: 2rem 1.625rem
@@ -262,14 +271,6 @@ button
 
 .footerText 
     text-align: center
-.noteList
-    position: absolute
-    top: 1rem
-    right: 1rem
-    ul 
-        display: flex
-        flex-direction: column
-        gap: 0.75rem
 
 @media screen and (max-width: 376px) 
     form 
