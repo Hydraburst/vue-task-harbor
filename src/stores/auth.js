@@ -9,8 +9,10 @@ export const useAuthStore = defineStore("auth", () => {
     username: "",
   });
 
+  const notes = ref([]);
   const error = ref("");
   const responseStatus = ref("");
+
   const auth = async (payload) => {
     error.value = "";
     try {
@@ -25,18 +27,18 @@ export const useAuthStore = defineStore("auth", () => {
     } catch (err) {
       error.value = err.response.data.error.message;
       responseStatus.value = "400";
-      console.log(err);
     }
     if (!error.value) {
       responseStatus.value = "200";
       error.value = "Successfully";
     }
-    
+    notes.value.unshift(error.value);
   };
   return {
     auth,
     userInfo,
     error,
     responseStatus,
+    notes,
   };
 });

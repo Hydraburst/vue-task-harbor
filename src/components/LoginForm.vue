@@ -1,12 +1,6 @@
 <template>
     <div class="noteList">
-        <div>
-            <transition-group tag="ul" name="user-list">
-                <li v-for="note in notes" :key="notes.values.length">
-                    <notifications :responseStatus="authStore.responseStatus" />
-                </li>
-            </transition-group>
-        </div>
+        <notifications/>
     </div>
     <form @submit.prevent>
         <div class="formContent">
@@ -39,7 +33,7 @@ import imgVisible from "../assets/visible.png"
 import { ref, computed } from 'vue'
 import { useAuthStore } from "../stores/auth"
 
-import Notifications from "./notifications/notifications.vue"
+import notifications from "./notifications/notifications.vue"
 
 const authStore = useAuthStore()
 const showPassword = ref(false)
@@ -51,11 +45,10 @@ const invalidEmailErrorText = ref('')
 const invalidPasswordErrorText = ref('')
 const passwordImg = ref(imgVisible)
 const type = ref('password')
-const notes = ref([])
+
 
 const signIn = async () => {
     await authStore.auth({ identifier: email.value, password: password.value })
-    notes.value.unshift(authStore.error)
 }
 
 const submitForm = () => {
@@ -128,50 +121,6 @@ const setPasswordError = computed(function () {
 </script>
 
 <style scoped lang="sass">
-ul 
-  position: absolute
-  display: flex
-  flex-direction: column
-  top: 1rem
-  right: 2rem
-  list-style: none
-  gap: 1rem
-  margin: 1rem 0
-  padding: 0
-
-
-li 
-  text-align: center
-
-
-.user-list-enter-from 
-  opacity: 0
-  transform: translateX(30px)
-  
-
-
-.user-list-enter-active 
-  transition: all 0.3s ease-out
-
-.user-list-enter-to,
-.user-list-leave-from 
-  opacity: 1
-  transform: translateX(0)
-  
-
-
-.user-list-leave-active 
-  transition: all 0.3s ease-in
-
-
-.user-list-leave-to 
-  opacity: 0
-  transform: translateX(30px)
-
-
-.user-list-move 
-  transition: transform 0.8s ease
-
 
 form 
     background-color: #e9dffb
@@ -181,15 +130,12 @@ form
     z-index: 100
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
 
-
 p 
     font-size: 12px
-
 
 label 
     font-size: 14px
     line-height: 20px
-
 
 .footerText 
     span 
@@ -238,7 +184,6 @@ button
     flex-direction: column
     gap: 20px
 
-
 .inputSection 
     display: flex
     flex-direction: column
@@ -254,20 +199,16 @@ button
     border: 1px solid var(--primary)
     align-items: center
 
-
 .inputFieldError 
     border: 1px solid var(--error)
-
 
 .errorText 
     color: var(--error)
     font-size: 14px
 
-
 .inputSection 
     p 
         font-size: 14px
-
 
 .footerText 
     text-align: center
