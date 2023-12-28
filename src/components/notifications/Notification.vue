@@ -1,5 +1,5 @@
 <template>
-    <div v-show="showNote" class="noteWrap">
+    <div class="noteWrap">
         <div :class="['noteContentWrap', defineWrap]">
             <div class="noteStartWrap">
                 <img :src="defineIcon">
@@ -25,10 +25,8 @@ import successIcon from "../../assets/success-icon.svg"
 import succesCloseIcon from "../../assets/success-close.svg"
 
 const authStore = useAuthStore()
-const showNote = ref(true)
-
 const clearNote = () => {
-    showNote.value = false
+    authStore.notes.shift()
 }
 
 onMounted(() => {
