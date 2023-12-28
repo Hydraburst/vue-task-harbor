@@ -8,20 +8,8 @@
 <script setup>
 import Notification from './Notification.vue';
 import { useAuthStore } from '../../stores/auth';
-import { onMounted, ref } from 'vue'
 
 const authStore = useAuthStore()
-
-const clearNotes = () => {
-    if(authStore.notes.length > 0) {
-        authStore.notes.shift()
-    }
-}
-onMounted(()=>{
-    setInterval(()=>{
-        clearNotes()
-    }, 5000)
-})
 
 </script>
 
@@ -43,8 +31,6 @@ li
 .user-list-enter-from 
   opacity: 0
   transform: translateX(30px)
-  
-
 
 .user-list-enter-active 
   transition: all 0.3s ease-out
@@ -54,16 +40,12 @@ li
   opacity: 1
   transform: translateX(0)
   
-
-
 .user-list-leave-active 
   transition: all 0.3s ease-in
-
 
 .user-list-leave-to 
   opacity: 0
   transform: translateX(30px)
-
 
 .user-list-move 
   transition: transform 0.8s ease

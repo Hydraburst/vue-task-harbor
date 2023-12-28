@@ -1,5 +1,5 @@
-<template v-if="showNote">
-    <div class="noteWrap">
+<template>
+    <div v-show="showNote" class="noteWrap">
         <div :class="['noteContentWrap', defineWrap]">
             <div class="noteStartWrap">
                 <img :src="defineIcon">
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import {useAuthStore} from '../../stores/auth'
+import { useAuthStore } from '../../stores/auth'
 import { defineProps, ref, onMounted } from 'vue'
 import errorIcon from '../../assets/error.svg'
 import errorCloseIcon from '../../assets/close.svg'
@@ -25,6 +25,18 @@ import successIcon from "../../assets/success-icon.svg"
 import succesCloseIcon from "../../assets/success-close.svg"
 
 const authStore = useAuthStore()
+const showNote = ref(true)
+
+const clearNote = () => {
+    showNote.value = false
+}
+
+onMounted(() => {
+    setTimeout(() => {
+        clearNote()
+    }, 5000)
+})
+
 
 const props = defineProps(['responseStatus'])
 const classes = ref({
@@ -37,8 +49,11 @@ const classes = ref({
 const defineIcon = ref('')
 const defineButton = ref('')
 const defineWrap = ref('')
-const defineText = ref ('')
+const defineText = ref('')
 const message = ref('')
+
+
+
 
 if (props.responseStatus === '200') {
     defineIcon.value = successIcon
@@ -46,7 +61,7 @@ if (props.responseStatus === '200') {
     defineWrap.value = classes.value.noteWrapSuccess
     defineText.value = 'successText'
     message.value = "Successfully logined"
-    
+
 } else if (props.responseStatus === '400') {
     defineIcon.value = errorIcon
     defineButton.value = errorCloseIcon
