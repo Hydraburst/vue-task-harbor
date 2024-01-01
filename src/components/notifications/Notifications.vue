@@ -1,7 +1,7 @@
 <template>
   <transition-group tag="ul" name="user-list">
-    <li v-for="note in authStore.notes" :key="authStore.notes.values.length">
-      <notification :responseStatus="authStore.responseStatus" />
+    <li v-for="note in authStore.notes" :key="note.key" :id="note.key">
+      <notification :responseStatus="note.responseStatus" :errorText="note.error" />
     </li>
   </transition-group>
 </template>
@@ -9,7 +9,6 @@
 import Notification from './Notification.vue';
 import { useAuthStore } from '../../stores/auth';
 const authStore = useAuthStore()
-
 </script>
 
 <style lang="sass">

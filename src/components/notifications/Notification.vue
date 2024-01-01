@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '../../stores/auth'
 import { defineProps, ref, onMounted } from 'vue'
 import errorIcon from '../../assets/error.svg'
 import errorCloseIcon from '../../assets/close.svg'
@@ -23,20 +22,9 @@ import warningIcon from "../../assets/warning-icon.svg"
 import warningCloseIcon from "../../assets/warning-close.svg"
 import successIcon from "../../assets/success-icon.svg"
 import succesCloseIcon from "../../assets/success-close.svg"
+import { useAuthStore } from '../../stores/auth'
 
-const authStore = useAuthStore()
-const clearNote = () => {
-    authStore.notes.shift()
-}
-
-onMounted(() => {
-    setTimeout(() => {
-        clearNote()
-    }, 5000)
-})
-
-
-const props = defineProps(['responseStatus'])
+const props = defineProps(['responseStatus', 'errorText'])
 const classes = ref({
     noteWrapSuccess: "noteWrapSuccess",
     noteWrapInfo: "noteWrapInfo",
@@ -50,8 +38,13 @@ const defineWrap = ref('')
 const defineText = ref('')
 const message = ref('')
 
+const authStore = useAuthStore()
 
-
+onMounted(() => {
+    setTimeout(() => {
+        authStore.notes.pop()
+    }, 5000);
+})
 
 if (props.responseStatus === '200') {
     defineIcon.value = successIcon
@@ -65,7 +58,8 @@ if (props.responseStatus === '200') {
     defineButton.value = errorCloseIcon
     defineWrap.value = classes.value.noteWrapError
     defineText.value = 'errorText'
-    message.value = authStore.error
+    message.value = props.errorText
+    console.log(props.errorText)
 }
 </script>
 

@@ -13,6 +13,15 @@ export const useAuthStore = defineStore("auth", () => {
   const error = ref("");
   const responseStatus = ref("");
 
+  const addNote = (err, status) => {
+    const note = {
+      error: err,
+      responseStatus: status,
+      key: Date.now(),
+    };
+    notes.value.unshift(note);
+  };
+
   const auth = async (payload) => {
     error.value = "";
     try {
@@ -27,12 +36,13 @@ export const useAuthStore = defineStore("auth", () => {
     } catch (err) {
       error.value = err.response.data.error.message;
       responseStatus.value = "400";
+      addNote(error, responseStatus);
     }
     if (!error.value) {
       responseStatus.value = "200";
       error.value = "Successfully";
+      addNote(error, responseStatus);
     }
-    notes.value.unshift(error.value);
   };
   return {
     auth,
