@@ -1,29 +1,49 @@
 <template>
     <div class="noteList">
-        <notifications/>
+        <notifications />
     </div>
     <form @submit.prevent>
         <div class="formContent">
             <div class="inputSection">
                 <label for="email">Email</label>
                 <div :class="['inputFieldWrap', setMailError]">
-                    <input id="email" type="text" v-model="userEmail" @blur="validateEmail" @click="toggleEmailError" />
+                    <input 
+                        id="email" 
+                        type="text" 
+                        v-model="userEmail" 
+                        @blur="validateEmail" 
+                        @click="toggleEmailError" 
+                    />
                 </div>
                 <span class="errorText" v-if="!isEmailValid">{{ invalidEmailErrorText }}</span>
             </div>
             <div class="inputSection">
                 <label for="password">Password</label>
                 <div :class="['inputFieldWrap', setPasswordError]">
-                    <input id="password" :type="type" v-model="userPassword" @blur="validatePassword"
-                        @click="togglePasswordError" />
-                    <img :src="passwordImg" alt="img" @click="toggleShowPassword" />
+                    <input 
+                        id="password" 
+                        :type="type" 
+                        v-model="userPassword" 
+                        @blur="validatePassword"
+                        @click="togglePasswordError" 
+                    />
+                    <img 
+                        :src="passwordImg" 
+                        alt="img" 
+                        @click="toggleShowPassword" 
+                    />
                 </div>
                 <span class="errorText" v-if="!isPasswordValid">{{ invalidPasswordErrorText }}</span>
             </div>
             <button type="submit" @click="submitForm">
                 <p>Log in</p>
             </button>
-            <p class="footerText">New user?<span>Sign up</span></p>
+            <p class="footerText">
+                New user?
+                <span>
+                    Sign up
+                </span>
+            </p>
         </div>
     </form>
 </template>
@@ -120,100 +140,117 @@ const setPasswordError = computed(function () {
 })
 </script>
 
-<style scoped lang="sass">
+<style lang="scss" scoped>
+form {
+    background-color: #e9dffb;
+    min-width: 402px;
+    border-radius: 4px;
+    margin: 0 auto;
+    z-index: 100;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
 
-form 
-    background-color: #e9dffb
-    min-width: 402px
-    border-radius: 4px
-    margin: 0 auto
-    z-index: 100
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
 
-p 
-    font-size: 12px
+p {
+    font-size: 12px;
+}
 
-label 
-    font-size: 14px
-    line-height: 20px
 
-.footerText 
-    span 
-        font-weight: 600
-        border-bottom: 2px solid black
-input 
-    margin: 0
-    padding: 0
-    background: none
-    border: none
-    outline: none
-    font-family: inherit
-    font-size: 100%
-    vertical-align: baseline
+label {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.footerText span {
+    font-weight: 600;
+    border-bottom: 2px solid black;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
     box-sizing: border-box
+}
 
+button {
+    background-color: var(--primary);
+    margin-top: 36px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
-button 
-    background-color: var(--primary)
-    margin-top: 36px
-    border-radius: 4px
-    border: none
-    cursor: pointer
-    transition: all 0.3s ease-in-out
-    &:hover
-        background-color: var(--primaryHover)
-    &:active
-        transform: scale(0.95)
+    &:hover {
+        background-color: var(--primaryHover);
+    }
 
+    &:active {
+        transform: scale(0.95);
+    }
 
-
-img 
-    max-width: 20px
-    max-height: 15px
-
-button 
-    p 
-        color: #fff
-        font-weight: 500
-        font-size: 16px
+    p {
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
         padding: 14px 0
+    }
+}
 
-.formContent 
-    padding: 2rem 1.625rem
-    display: flex
-    flex-direction: column
-    gap: 20px
+img {
+    max-width: 20px;
+    max-height: 15px;
+}
 
-.inputSection 
-    display: flex
-    flex-direction: column
-    gap: 8px
+.formContent {
+    padding: 2rem 1.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-.inputFieldWrap 
-    display: flex
-    padding: 14px 16px 14px 16px
-    flex-direction: row
-    justify-content: space-between
-    background-color: #fff
-    border-radius: 4px
-    border: 1px solid var(--primary)
-    align-items: center
+.inputSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-.inputFieldError 
-    border: 1px solid var(--error)
+    p {
+        font-size: 14px;
+    }
+}
 
-.errorText 
-    color: var(--error)
-    font-size: 14px
+.inputFieldWrap {
+    display: flex;
+    padding: 14px 16px 14px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid var(--primary);
+    align-items: center;
+}
 
-.inputSection 
-    p 
-        font-size: 14px
+.inputFieldError {
+    border: 1px solid var(--error);
+}
 
-.footerText 
-    text-align: center
+.errorText {
+    color: var(--error);
+    font-size: 14px;
+}
 
-@media screen and (max-width: 376px) 
-    form 
-        min-width: 355px
+.footerText {
+    text-align: center;
+}
+
+@media screen and (max-width: 376px) {
+    form {
+        min-width: 355px;
+    }
+}
 </style>

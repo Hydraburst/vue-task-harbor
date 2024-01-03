@@ -63,49 +63,78 @@ if (props.responseStatus === '200') {
 }
 </script>
 
-<style lang="sass" scoped>
-    .noteWrap
-        border-radius: 8px
-        display: flex
-        flex-direction: column
-        top: 2rem
-        right: 1rem
-        min-width: 311px
-    .noteWrapError 
-        border: 1px solid var(--error)
-        background-color: var(--errorPrimary)
-    .noteWrapSuccess
-        border: 1px solid var(--notifySuccess)
-        background-color: var(--notifySuccessPrimary)
-    .noteWrapWarning
-        border: 1px solid var(--notifyWarning)
-        background-color: var(--notifyWarningPrimary)
-    .noteWrapInfo
-        border: 1px solid var(--notifyInfo)
-        background-color: var(--notifyInfoPrimary)
-    .noteContentWrap
-        display: flex
-        border-radius: 8px
-        padding: 14px
-        justify-content: space-between
-    .noteStartWrap 
-        display: flex
-        gap: 10px
-    .errorText 
-        color: var(--error)
-    .successText
-        color: var(--notifySuccess)
-    .warningText
-        color: var(--notifyWarning)
-    .infoText 
-        color: var(--notifyInfo)
-    .infoText 
-        color: var(--notifyInfo)
-    .warningText 
-        color: var(--notifyWarning)
-    .successText 
-        color: var(--notifySuccess)
-    img 
-        height: 16px
-        width: 16px
+<style lang="scss" scoped>
+.noteWrap {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    top: 2rem;
+    right: 1rem;
+    min-width: 311px;
+}
+
+.noteWrapError {
+    border: 1px solid var(--error);
+    background-color: var(--errorPrimary);
+}
+
+.noteWrapSuccess {
+    border: 1px solid var(--notifySuccess);
+    background-color: var(--notifySuccessPrimary);
+}
+
+.noteWrapWarning {
+    border: 1px solid var(--notifyWarning);
+    background-color: var(--notifyWarningPrimary);
+}
+
+.noteWrapInfo {
+    border: 1px solid var(--notifyInfo);
+    background-color: var(--notifyInfoPrimary);
+}
+
+.noteContentWrap {
+    display: flex;
+    border-radius: 8px;
+    padding: 14px;
+    justify-content: space-between;
+}
+
+.noteStartWrap {
+    display: flex;
+    gap: 10px;
+}
+
+.errorText {
+    color: var(--error);
+}
+
+.successText {
+    color: var(--notifySuccess);
+}
+
+.warningText {
+    color: var(--notifyWarning);
+}
+
+.infoText {
+    color: var(--notifyInfo);
+}
+
+.infoText {
+    color: var(--notifyInfo);
+}
+
+.warningText {
+    color: var(--notifyWarning);
+}
+
+.successText {
+    color: var(--notifySuccess);
+}
+
+img {
+    height: 16px;
+    width: 16px;
+}
 </style>

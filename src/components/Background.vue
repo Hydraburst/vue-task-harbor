@@ -22,7 +22,8 @@
         </div>
     </div>
 </template>
-<script>
+
+<script setup>
 import logoTop from "../assets/logo-top.svg"
 import logoMid from "../assets/logo-mid.svg"
 import logoBot from "../assets/logo-bot.svg"
@@ -31,90 +32,79 @@ import bgLsPurple from "../assets/bg-ls-purple.png"
 import bgLs from "../assets/bg-ls.png"
 import bgRsBirch from "../assets/bg-rs-birch.png"
 import bgRsBlue from "../assets/bg-rs-blue.png"
+</script>
 
-export default {
-    setup() {
-        return {
-            logoTop,
-            logoMid,
-            logoBot,
-            bgLsBlue,
-            bgLsPurple,
-            bgLs,
-            bgRsBirch,
-            bgRsBlue,
-        }
+<style lang="scss" scoped>
+.logo {
+    display: flex;
+    justify-content: flex-end;
+    padding: 32px 66px 0 32px;
+    align-items: flex-start;
+}
+
+.logoElements {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 58px;
+    max-height: 80px;
+    align-items: center;
+    line-height: 0;
+}
+
+.underline {
+    margin-top: 6px;
+    border-bottom: 3px solid black;
+}
+
+.bgImg {
+    position: absolute;
+    max-width: 100%;
+    z-index: -1;
+}
+
+.bgImgRight {
+    right: 0;
+    bottom: 0;
+}
+
+
+.bgImgLeft {
+    top: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 769px) {
+    .bgImg {
+        width: 370px;
+    }
+
+    .bgRsBlue {
+        width: 290px;
+    }
+
+    .bgLs {
+        width: 320px;
+    }
+
+}
+
+@media (max-width:481px) {
+    .bgImg {
+        width: 180px;
+    }
+
+    .bgRsBlue {
+        width: 120px;
+    }
+
+    .bgLs {
+        width: 150px;
+    }
+
+    .logo {
+        justify-content: center;
+        align-items: center;
     }
 }
-</script>
-<style scoped lang="sass">
-.logo 
-    display: flex
-    justify-content: flex-end
-    padding: 32px 66px 0 32px
-    align-items: flex-start
-
-
-.logoElements 
-    display: flex
-    flex-direction: column
-    gap: 8px
-    max-width: 58px
-    max-height: 80px
-    align-items: center
-    line-height: 0
-
-
-.underline 
-    margin-top: 6px
-    border-bottom: 3px solid black
-
-
-.bgImg 
-    position: absolute
-    max-width: 100%
-    z-index: -1
-
-
-.bgImgRight 
-    right: 0
-    bottom: 0
-
-
-.bgImgLeft 
-    top: 0
-    left: 0
-
-
-@media screen and (max-width: 769px) 
-    .bgImg 
-        width: 370px
-    
-
-    .bgRsBlue 
-        width: 290px
-    
-
-    .bgLs 
-        width: 320px
-    
-
-
-@media (max-width:481px) 
-    .bgImg 
-        width: 180px
-    
-
-    .bgRsBlue 
-        width: 120px
-    
-
-    .bgLs 
-        width: 150px
-    
-
-    .logo 
-        justify-content: center
-        align-items: center
-    
 </style>
