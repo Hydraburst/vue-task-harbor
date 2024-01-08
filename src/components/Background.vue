@@ -1,26 +1,19 @@
-<template>
-    <div class="topLeftBg">
-        <img class="bgImg bgImgLeft" :src="bgLsBlue" alt="">
-        <img class="bgImg bgImgLeft" :src="bgLsPurple" alt="">
-        <img class="bgImg bgImgLeft bgLs" :src="bgLs" alt="">
-
-    </div>
-    <div class="botRightBg">
-        <img class="bgImg bgImgRight" :src="bgRsBlue" alt="">
-        <img class="bgImg bgImgRight bgRsBlue" :src="bgRsBirch" alt="">
-        <img class="bgImg bgImgRight bgLs" :src="bgLs" alt="">
-
-    </div>
-    <div class="logo">
-        <div class="logoElements">
-            <img :src="logoTop" alt="logo">
-            <div class="logoBotSection">
-                <img :src="logoBot" alt="">
-                <img :src="logoMid" alt="">
-                <div class="underline"></div>
-            </div>
-        </div>
-    </div>
+<template lang="pug">
+.topLeftBg
+    img( class="bgImg bgImgLeft" :src="bgLsBlue" alt="")
+    img(class="bgImg bgImgLeft" :src="bgLsPurple" alt="") 
+    img(class="bgImg bgImgLeft bgLs" :src="bgLs" alt="")
+.botRightBg
+    img(class="bgImg bgImgRight" :src="bgRsBlue" alt="") 
+    img(class="bgImg bgImgRight bgRsBlue" :src="bgRsBirch" alt="") 
+    img(class="bgImg bgImgRight bgLs" :src="bgLs" alt="") 
+.logo
+    .logoElements
+        img(:src="logoTop" alt="logo")
+        .logoBotSection
+            img(:src="logoBot" alt="")
+            img(:src="logoMid" alt="")
+            .underline
 </template>
 
 <script setup>

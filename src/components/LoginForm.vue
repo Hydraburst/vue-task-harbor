@@ -1,59 +1,44 @@
-<template>
-    <div class="noteList">
-        <notifications />
-    </div>
-    <form @submit.prevent>
-        <div class="formContent">
-            <div class="inputSection">
-                <label for="email">Email</label>
-                <div :class="['inputFieldWrap', setMailError]">
-                    <input 
-                        id="email" 
+<template lang="pug">
+.noteList
+    notifications
+    form(@submit.prevent)
+        .formContent
+            .inputSection
+                label(for="email") Email
+                .inputFieldWrap(:class="setMailError") 
+                    input#email(
                         type="text" 
                         v-model="userEmail" 
                         @blur="validateEmail" 
                         @click="toggleEmailError" 
-                    />
-                </div>
-                <span class="errorText" v-if="!isEmailValid">{{ invalidEmailErrorText }}</span>
-            </div>
-            <div class="inputSection">
-                <label for="password">Password</label>
-                <div :class="['inputFieldWrap', setPasswordError]">
-                    <input 
-                        id="password" 
+                    ) 
+                span.errorText(v-if="!isEmailValid") {{invalidEmailErrorText}}
+            .inputSection
+                label(for="password") Password
+                .inputFieldWrap(:class="setPasswordError") 
+                    input#password( 
                         :type="type" 
                         v-model="userPassword" 
                         @blur="validatePassword"
                         @click="togglePasswordError" 
-                    />
-                    <img 
+                    ) 
+                    img(
                         :src="passwordImg" 
                         alt="img" 
-                        @click="toggleShowPassword" 
-                    />
-                </div>
-                <span class="errorText" v-if="!isPasswordValid">{{ invalidPasswordErrorText }}</span>
-            </div>
-            <button type="submit" @click="submitForm">
-                <p>Log in</p>
-            </button>
-            <p class="footerText">
-                New user?
-                <span>
-                    Sign up
-                </span>
-            </p>
-        </div>
-    </form>
+                        @click="toggleShowPassword"
+                    ) 
+                span.errorText(v-if="!isPasswordValid") {{ invalidPasswordErrorText }}
+            button(type="submit" @click="submitForm") 
+                p Log in
+            p.footerText New user?
+                span Sign up
 </template>
 <script setup>
 import imgNotVisible from "../assets/not-visible.png"
 import imgVisible from "../assets/visible.png"
 import { ref, computed } from 'vue'
 import { useAuthStore } from "../stores/auth"
-
-import notifications from "./notifications/notifications.vue"
+import Notifications from "./notifications/Notifications.vue"
 
 const authStore = useAuthStore()
 const showPassword = ref(false)

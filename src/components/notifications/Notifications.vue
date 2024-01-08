@@ -1,16 +1,14 @@
-<template>
-  <transition-group tag="ul" name="user-list">
-    <li 
-      v-for="note in authStore.notes" 
-      :key="note.key" 
-      :id="note.key"
-    >
-      <notification 
-        :responseStatus="note.responseStatus" 
-        :errorText="note.error" 
-      />
-    </li>
-  </transition-group>
+<template lang="pug">
+transition-group(tag="ul" name="user-list") 
+  li(
+    v-for="note in authStore.notes" 
+    :key="note.key" 
+    :id="note.key"
+    ) 
+    notification(
+      :responseStatus="note.responseStatus" 
+      :errorText="note.error" 
+    )
 </template>
 <script setup>
 import Notification from './Notification.vue';

@@ -1,15 +1,10 @@
-<template>
-    <div class="noteWrap">
-        <div :class="['noteContentWrap', defineWrap]">
-            <div class="noteStartWrap">
-                <img :src="defineIcon">
-                <p :class="defineText">
-                    {{ message }}
-                </p>
-            </div>
-            <img :src="defineButton" alt="" class="errorClose">
-        </div>
-    </div>
+<template lang="pug">
+.noteWrap
+    .noteContentWrap(:class="defineWrap")
+        .noteStartWrap
+            img(:src="defineIcon") 
+            p(:class="defineText") {{ message }}
+        img(:src="defineButton" alt="" class="errorClose")
 </template>
 
 <script setup>
@@ -23,6 +18,7 @@ import warningCloseIcon from "../../assets/warning-close.svg"
 import successIcon from "../../assets/success-icon.svg"
 import succesCloseIcon from "../../assets/success-close.svg"
 import { useAuthStore } from '../../stores/auth'
+
 
 const props = defineProps(['responseStatus', 'errorText'])
 const classes = ref({
