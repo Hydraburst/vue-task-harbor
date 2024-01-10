@@ -1,6 +1,6 @@
 <template lang="pug">
 .topLeftBg
-    img(class="bgImg bgImgLeft" :src="bgLsBlues" alt="")
+    img(class="bgImg bgImgLeft" :src="bgLsBlue" alt="")
     img(class="bgImg bgImgLeft" :src="bgLsPurple" alt="") 
     img(class="bgImg bgImgLeft bgLs" :src="bgLs" alt="")
 .botRightBg

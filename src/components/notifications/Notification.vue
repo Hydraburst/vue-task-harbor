@@ -8,11 +8,12 @@
             :src="defineButton" 
             alt="" 
             class="errorClose" 
+            @click="$emit('onRemoveNote')"
         )
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted } from 'vue'
+import { defineProps, ref} from 'vue'
 import errorIcon from '../../assets/icons/error.svg'
 import errorCloseIcon from '../../assets/icons/close.svg'
 import infoIcon from "../../assets/icons/info-icon.svg"
@@ -24,7 +25,7 @@ import succesCloseIcon from "../../assets/icons/success-close.svg"
 import { useAuthStore } from '../../stores/auth'
 
 
-const props = defineProps(['responseStatus', 'errorText', 'note'])
+const props = defineProps(['responseStatus', 'errorText'])
 const classes = ref({
     noteWrapSuccess: "noteWrapSuccess",
     noteWrapInfo: "noteWrapInfo",
