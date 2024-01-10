@@ -1,6 +1,6 @@
 <template lang="pug">
 .topLeftBg
-    img( class="bgImg bgImgLeft" :src="bgLsBlue" alt="")
+    img(class="bgImg bgImgLeft" :src="bgLsBlues" alt="")
     img(class="bgImg bgImgLeft" :src="bgLsPurple" alt="") 
     img(class="bgImg bgImgLeft bgLs" :src="bgLs" alt="")
 .botRightBg
@@ -17,14 +17,14 @@
 </template>
 
 <script setup>
-import logoTop from "../assets/logo-top.svg"
-import logoMid from "../assets/logo-mid.svg"
-import logoBot from "../assets/logo-bot.svg"
-import bgLsBlue from "../assets/bg-ls-blue.png"
-import bgLsPurple from "../assets/bg-ls-purple.png"
-import bgLs from "../assets/bg-ls.png"
-import bgRsBirch from "../assets/bg-rs-birch.png"
-import bgRsBlue from "../assets/bg-rs-blue.png"
+import logoTop from "../assets/img/logo-top.svg"
+import logoMid from "../assets/img/logo-mid.svg"
+import logoBot from "../assets/img/logo-bot.svg"
+import bgLsBlue from "../assets/img/bg-ls-blue.png"
+import bgLsPurple from "../assets/img/bg-ls-purple.png"
+import bgLs from "../assets/img/bg-ls.png"
+import bgRsBirch from "../assets/img/bg-rs-birch.png"
+import bgRsBlue from "../assets/img/bg-rs-blue.png"
 </script>
 
 <style lang="scss" scoped>

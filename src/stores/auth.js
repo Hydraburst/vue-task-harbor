@@ -18,6 +18,7 @@ export const useAuthStore = defineStore("auth", () => {
       error: err,
       responseStatus: status,
       key: Date.now(),
+      id: Date.now()
     };
     notes.value.unshift(note);
   };

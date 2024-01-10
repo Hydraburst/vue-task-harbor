@@ -1,6 +1,5 @@
 <template lang="pug">
 .noteList
-    notifications
     form(@submit.prevent)
         .formContent
             .inputSection
@@ -23,7 +22,7 @@
                         @click="togglePasswordError" 
                     ) 
                     img(
-                        :src="passwordImg" 
+                        :src="passwordImg"
                         alt="img" 
                         @click="toggleShowPassword"
                     ) 
@@ -34,8 +33,8 @@
                 span Sign up
 </template>
 <script setup>
-import imgNotVisible from "../assets/not-visible.png"
-import imgVisible from "../assets/visible.png"
+import imgNotVisible from "../assets/icons/not-visible.png"
+import imgVisible from "../assets/icons/visible.png"
 import { ref, computed } from 'vue'
 import { useAuthStore } from "../stores/auth"
 import Notifications from "./notifications/Notifications.vue"

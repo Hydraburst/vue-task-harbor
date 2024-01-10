@@ -8,12 +8,17 @@ transition-group(tag="ul" name="user-list")
     notification(
       :responseStatus="note.responseStatus" 
       :errorText="note.error" 
-    )
+      :note ="note"
+      @onRemoveNote="(removeNote(note.id))"
+      )
 </template>
 <script setup>
 import Notification from './Notification.vue';
 import { useAuthStore } from '../../stores/auth';
 const authStore = useAuthStore()
+
+
+
 </script>
 
 <style lang="scss" scoped>

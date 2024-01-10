@@ -1,7 +1,8 @@
 <script setup>
+import Notifications from './components/notifications/Notifications.vue';
 </script>
-<template>
+<template lang="pug">
 <router-view />
+notifications
 </template>
-<style scoped>
-</style>
+<style scoped></style>

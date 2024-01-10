@@ -4,23 +4,27 @@
         .noteStartWrap
             img(:src="defineIcon") 
             p(:class="defineText") {{ message }}
-        img(:src="defineButton" alt="" class="errorClose")
+        img(
+            :src="defineButton" 
+            alt="" 
+            class="errorClose" 
+        )
 </template>
 
 <script setup>
 import { defineProps, ref, onMounted } from 'vue'
-import errorIcon from '../../assets/error.svg'
-import errorCloseIcon from '../../assets/close.svg'
-import infoIcon from "../../assets/info-icon.svg"
-import infoCloseIcon from "../../assets/info-close.svg"
-import warningIcon from "../../assets/warning-icon.svg"
-import warningCloseIcon from "../../assets/warning-close.svg"
-import successIcon from "../../assets/success-icon.svg"
-import succesCloseIcon from "../../assets/success-close.svg"
+import errorIcon from '../../assets/icons/error.svg'
+import errorCloseIcon from '../../assets/icons/close.svg'
+import infoIcon from "../../assets/icons/info-icon.svg"
+import infoCloseIcon from "../../assets/icons/info-close.svg"
+import warningIcon from "../../assets/icons/warning-icon.svg"
+import warningCloseIcon from "../../assets/icons/warning-close.svg"
+import successIcon from "../../assets/icons/success-icon.svg"
+import succesCloseIcon from "../../assets/icons/success-close.svg"
 import { useAuthStore } from '../../stores/auth'
 
 
-const props = defineProps(['responseStatus', 'errorText'])
+const props = defineProps(['responseStatus', 'errorText', 'note'])
 const classes = ref({
     noteWrapSuccess: "noteWrapSuccess",
     noteWrapInfo: "noteWrapInfo",
@@ -36,11 +40,12 @@ const message = ref('')
 
 const authStore = useAuthStore()
 
-onMounted(() => {
-    setTimeout(() => {
-        authStore.notes.pop()
-    }, 5000);
-})
+
+// onMounted(() => {
+//     setTimeout(() => {
+//         authStore.notes.pop()
+//     }, 5000);
+// })
 
 if (props.responseStatus === '200') {
     defineIcon.value = successIcon
