@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref} from 'vue'
+import { defineProps, ref, onMounted} from 'vue'
 import errorIcon from '../../assets/icons/error.svg'
 import errorCloseIcon from '../../assets/icons/close.svg'
 import infoIcon from "../../assets/icons/info-icon.svg"
@@ -22,8 +22,8 @@ import warningIcon from "../../assets/icons/warning-icon.svg"
 import warningCloseIcon from "../../assets/icons/warning-close.svg"
 import successIcon from "../../assets/icons/success-icon.svg"
 import succesCloseIcon from "../../assets/icons/success-close.svg"
-import { useAuthStore } from '../../stores/auth'
 
+import { useAuthStore } from '../../stores/auth'
 
 const props = defineProps(['responseStatus', 'errorText'])
 const classes = ref({
@@ -31,8 +31,8 @@ const classes = ref({
     noteWrapInfo: "noteWrapInfo",
     noteWrapWarning: "noteWrapWarning",
     noteWrapError: "noteWrapError",
-
 })
+
 const defineIcon = ref('')
 const defineButton = ref('')
 const defineWrap = ref('')
@@ -42,11 +42,11 @@ const message = ref('')
 const authStore = useAuthStore()
 
 
-// onMounted(() => {
-//     setTimeout(() => {
-//         authStore.notes.pop()
-//     }, 5000);
-// })
+onMounted(() => {
+    setTimeout(() => {
+        authStore.notes.pop()
+    }, 5000);
+})
 
 if (props.responseStatus === '200') {
     defineIcon.value = successIcon

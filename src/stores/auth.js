@@ -50,5 +50,6 @@ export const useAuthStore = defineStore("auth", () => {
     error,
     responseStatus,
     notes,
+    addNote
   };
 });

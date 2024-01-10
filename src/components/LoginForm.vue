@@ -37,7 +37,6 @@ import imgNotVisible from "../assets/icons/not-visible.png"
 import imgVisible from "../assets/icons/visible.png"
 import { ref, computed } from 'vue'
 import { useAuthStore } from "../stores/auth"
-import Notifications from "./notifications/Notifications.vue"
 
 const authStore = useAuthStore()
 const showPassword = ref(false)
