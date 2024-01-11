@@ -36,9 +36,11 @@
 import imgNotVisible from "../assets/icons/not-visible.png"
 import imgVisible from "../assets/icons/visible.png"
 import { ref, computed } from 'vue'
-import { useAuthStore } from "../stores/auth"
+import { loginUser } from "../services/api/loginApi"
+import { useNoteStore } from "../stores/noteStore"
 
-const authStore = useAuthStore()
+
+const noteStore = useNoteStore()
 const showPassword = ref(false)
 const isEmailValid = ref(true)
 const isPasswordValid = ref(true)
@@ -51,7 +53,15 @@ const type = ref('password')
 
 
 const signIn = async () => {
-    await authStore.auth({ identifier: email.value, password: password.value })
+    try {
+        const response = await loginUser({ identifier: email.value, password: password.value })
+        if (response) {
+            console.log(response.data)
+        }
+    } catch (error) {
+        noteStore.addNote(error.message, error.code)
+    }
+
 }
 
 const submitForm = () => {

@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted} from 'vue'
+import { defineProps, ref, onMounted } from 'vue'
 import errorIcon from '../../assets/icons/error.svg'
 import errorCloseIcon from '../../assets/icons/close.svg'
 import infoIcon from "../../assets/icons/info-icon.svg"
@@ -22,10 +22,11 @@ import warningIcon from "../../assets/icons/warning-icon.svg"
 import warningCloseIcon from "../../assets/icons/warning-close.svg"
 import successIcon from "../../assets/icons/success-icon.svg"
 import succesCloseIcon from "../../assets/icons/success-close.svg"
+import { useNoteStore } from '../../stores/noteStore'
 
-import { useAuthStore } from '../../stores/auth'
 
-const props = defineProps(['responseStatus', 'errorText'])
+
+const props = defineProps(['note'])
 const classes = ref({
     noteWrapSuccess: "noteWrapSuccess",
     noteWrapInfo: "noteWrapInfo",
@@ -39,7 +40,8 @@ const defineWrap = ref('')
 const defineText = ref('')
 const message = ref('')
 
-const authStore = useAuthStore()
+const noteStore = useNoteStore()
+
 
 
 onMounted(() => {
@@ -48,20 +50,19 @@ onMounted(() => {
     }, 5000);
 })
 
-if (props.responseStatus === '200') {
+if (props.note.responseStatus === '') {
     defineIcon.value = successIcon
     defineButton.value = succesCloseIcon
     defineWrap.value = classes.value.noteWrapSuccess
     defineText.value = 'successText'
     message.value = "Successfully logined"
 
-} else if (props.responseStatus === '400') {
+} else if (props.note.responseStatus === 'ERR_BAD_REQUEST') {
     defineIcon.value = errorIcon
     defineButton.value = errorCloseIcon
     defineWrap.value = classes.value.noteWrapError
     defineText.value = 'errorText'
-    message.value = props.errorText
-    console.log(props.errorText)
+    message.value = "Error"
 }
 </script>
 
