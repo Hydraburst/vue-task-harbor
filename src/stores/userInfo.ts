@@ -5,10 +5,8 @@ import { defineStore } from "pinia";
 export const useUserInfo = defineStore("user", () => {
   const userInfo = ref({
     token: "",
-    email: "",
-    username: "",
+    userData: "",
   });
-
   return {
     userInfo,
   };

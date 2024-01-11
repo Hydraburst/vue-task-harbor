@@ -17,7 +17,7 @@ const noteStore = useNoteStore()
 
 
 const removeNote = (idx) => {
-  authStore.notes.splice(idx, 1)
+  noteStore.notes.splice(idx, 1)
 }
 </script>
 

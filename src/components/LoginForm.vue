@@ -38,8 +38,9 @@ import imgVisible from "../assets/icons/visible.png"
 import { ref, computed } from 'vue'
 import { loginUser } from "../services/api/loginApi"
 import { useNoteStore } from "../stores/noteStore"
+import { useUserInfo } from "../stores/userInfo"
 
-
+const userInfo = useUserInfo()
 const noteStore = useNoteStore()
 const showPassword = ref(false)
 const isEmailValid = ref(true)
@@ -56,10 +57,12 @@ const signIn = async () => {
     try {
         const response = await loginUser({ identifier: email.value, password: password.value })
         if (response) {
-            console.log(response.data)
+            noteStore.addNote('succeeded')
+            userInfo.userInfo.token = response.data.jwt
+            userInfo.userInfo.userData = response.data.user
         }
     } catch (error) {
-        noteStore.addNote(error.message, error.code)
+        noteStore.addNote('failed')
     }
 
 }

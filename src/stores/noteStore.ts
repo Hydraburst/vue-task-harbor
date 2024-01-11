@@ -1,14 +1,15 @@
 import { defineStore } from "pinia";
-import {ref} from "vue"
+import { Ref, ref } from "vue";
+
+interface Note {
+  responseStatus: string;
+  key: number;
+}
 
 export const useNoteStore = defineStore("notesList", () => {
-  const notes = ref([]);
-  const error = ref("");
-  const responseStatus = ref("");
-
-  const addNote = (err, status) => {
+  const notes: Ref<Note[]> = ref([]);
+  const addNote = (status: string) => {
     const note = {
-      error: err,
       responseStatus: status,
       key: Date.now(),
     };
@@ -17,5 +18,5 @@ export const useNoteStore = defineStore("notesList", () => {
   return {
     notes,
     addNote,
-  }
+  };
 });

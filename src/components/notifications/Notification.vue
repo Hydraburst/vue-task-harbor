@@ -25,8 +25,9 @@ import succesCloseIcon from "../../assets/icons/success-close.svg"
 import { useNoteStore } from '../../stores/noteStore'
 
 
-
+const emits = defineEmits(['onRemoveNote'])
 const props = defineProps(['note'])
+
 const classes = ref({
     noteWrapSuccess: "noteWrapSuccess",
     noteWrapInfo: "noteWrapInfo",
@@ -43,26 +44,25 @@ const message = ref('')
 const noteStore = useNoteStore()
 
 
-
 onMounted(() => {
     setTimeout(() => {
-        authStore.notes.pop()
+        noteStore.notes.pop()
     }, 5000);
 })
 
-if (props.note.responseStatus === '') {
+if (props.note.responseStatus === 'succeeded') {
     defineIcon.value = successIcon
     defineButton.value = succesCloseIcon
     defineWrap.value = classes.value.noteWrapSuccess
     defineText.value = 'successText'
     message.value = "Successfully logined"
 
-} else if (props.note.responseStatus === 'ERR_BAD_REQUEST') {
+} else if (props.note.responseStatus === 'failed') {
     defineIcon.value = errorIcon
     defineButton.value = errorCloseIcon
     defineWrap.value = classes.value.noteWrapError
     defineText.value = 'errorText'
-    message.value = "Error"
+    message.value = "Invalid identifier or password"
 }
 </script>
 
