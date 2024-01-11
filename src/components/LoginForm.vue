@@ -60,7 +60,7 @@ const signIn = async () => {
         if (response) {
             noteStore.addNote('succeeded')
             userInfo.userInfo.token = response.data.jwt
-            userInfo.userInfo.userData = response.data.use
+            userInfo.userInfo.userData = response.data.user
             router.push("/dashboard")
         }
     } catch (error) {
