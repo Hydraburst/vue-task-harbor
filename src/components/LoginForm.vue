@@ -39,6 +39,7 @@ import { ref, computed } from 'vue'
 import { loginUser } from "../services/api/loginApi"
 import { useNoteStore } from "../stores/noteStore"
 import { useUserInfo } from "../stores/userInfo"
+import router from "../router/router"
 
 const userInfo = useUserInfo()
 const noteStore = useNoteStore()
@@ -59,7 +60,8 @@ const signIn = async () => {
         if (response) {
             noteStore.addNote('succeeded')
             userInfo.userInfo.token = response.data.jwt
-            userInfo.userInfo.userData = response.data.user
+            userInfo.userInfo.userData = response.data.use
+            router.push("/dashboard")
         }
     } catch (error) {
         noteStore.addNote('failed')
