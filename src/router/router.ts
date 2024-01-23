@@ -20,9 +20,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userInfo = useUserInfo();
   const isAutorized = userInfo.userInfo.token;
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.meta.requiresAuth && !isAutorized) {
     next({ name: "/" });
-  } else if (to.meta.requiresGuest && isAuthenticated) {
+  } else if (to.meta.requiresGuest && isAutorized) {
     next({ name: "/dashboard" });
   } else {
     next();
