@@ -8,8 +8,11 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/dashboard",
-    component: () => import ("../components/Dashboard.vue")
-  }
+    component: () => import("../components/Dashboard.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = createRouter({
@@ -20,9 +23,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userInfo = useUserInfo();
   const isAutorized = userInfo.userInfo.token;
+
   if (to.meta.requiresAuth && !isAutorized) {
     next({ name: "/" });
-  } else if (to.meta.requiresGuest && isAutorized) {
+  } else if (isAutorized) {
     next({ name: "/dashboard" });
   } else {
     next();
