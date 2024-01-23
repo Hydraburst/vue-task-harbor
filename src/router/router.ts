@@ -5,6 +5,9 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: () => import("../pages/LoginPage.vue"),
+    meta: {
+      requiresGuest: true,
+    },
   },
   {
     path: "/dashboard",
@@ -22,11 +25,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userInfo = useUserInfo();
-  const isAutorized = userInfo.userInfo.token;
+  const isAuthorized = userInfo.userInfo.token;
 
-  if (to.meta.requiresAuth && !isAutorized) {
+  if (to.meta.requiresAuth && !isAuthorized) {
     next({ name: "/" });
-  } else if (isAutorized) {
+  } else if (to.meta.requiresGuest && isAuthorized) {
     next({ name: "/dashboard" });
   } else {
     next();

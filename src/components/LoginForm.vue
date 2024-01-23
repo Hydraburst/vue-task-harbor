@@ -35,7 +35,7 @@
 <script setup>
 import imgNotVisible from "../assets/icons/not-visible.png"
 import imgVisible from "../assets/icons/visible.png"
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { loginUser } from "../services/api/loginApi"
 import { useNoteStore } from "../stores/noteStore"
 import { useUserInfo } from "../stores/userInfo"
@@ -65,6 +65,9 @@ const signIn = async () => {
         }
     } catch (error) {
         noteStore.addNote('failed')
+        nextTick(()=>{
+            signIn()
+        })
     }
 
 }
