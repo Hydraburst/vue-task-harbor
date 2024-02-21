@@ -1,8 +1,9 @@
 <template lang="pug">
-p Dashboard
+Header
+router-view 
 </template>
 <script setup>
-
+    import Header from './header/Header.vue';
 </script>
 <style lang="scss">
     

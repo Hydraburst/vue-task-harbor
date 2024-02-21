@@ -5,16 +5,31 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: () => import("../pages/LoginPage.vue"),
-    meta: {
-      requiresGuest: true,
-    },
   },
   {
     path: "/dashboard",
     component: () => import("../components/Dashboard.vue"),
+    name: "dashboard",
     meta: {
       requiresAuth: true,
     },
+    children: [
+      {
+        path: "work",
+        name: "work",
+        component: () => import("../pages/WorkPage.vue"),
+      },
+      {
+        path: "project",
+        name: "project",
+        component: () => import("../pages/ProjectsPage.vue"),
+      },
+      {
+        path: "teams",
+        name: "teams", 
+        component: () => import ("../pages/TeamsPage.vue")
+      },
+    ],
   },
 ];
 
